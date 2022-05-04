@@ -70,7 +70,7 @@ function PricePage() {
 
       <Table onRow={(record, rowIndex) => {
           return {
-            onClick: e => {window.location = `/priceByTime?time=${record.Date}`}, // clicking a row takes the user to a detailed view of the price given the time. 
+            onClick: e => {window.location = `/priceByTime?date=${record.Date}`}, // clicking a row takes the user to a detailed view of the price given the time. 
           };
       }} dataSource={prices} pagination={{ pageSizeOptions:[5, 10], defaultPageSize: 5, showQuickJumper:true }}>
           <ColumnGroup title="Time">

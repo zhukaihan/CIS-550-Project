@@ -52,7 +52,7 @@ function PriceByTime() {
         autoComplete="off"
       >
         <Form.Item label="Date" name="date" rules={[{required: true}]}>
-          <DatePicker showTime defaultValue={moment(DEFAULT_DATE, DATE_FORMAT)} format={DATE_FORMAT} />
+          <DatePicker showTime defaultValue={moment(dateQuery, DATE_FORMAT)} format={DATE_FORMAT} />
         </Form.Item>
         <Form.Item wrapperCol={{offset: 8, span: 16}}>
           <Button type="primary" htmlType="submit">Submit</Button>
