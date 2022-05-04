@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation, useHistory } from "react-router-dom";
 import api from '../../api';
 import { Table, Form, Input, Button, DatePicker } from 'antd';
 import moment from 'moment';
@@ -8,10 +9,25 @@ const { Column, ColumnGroup } = Table;
 const DEFAULT_DATE = "2015-10-10 00:00:00";
 const DATE_FORMAT = 'YYYY-MM-DD HH:mm:ss';
 
+function useQuery() {
+  const { search } = useLocation();
+  return React.useMemo(() => new URLSearchParams(search), [search]);
+}
+
 function PriceByTime() {
   const [prices, setPrices] = useState([]);
+  
+  let history = useHistory();
+  let query = useQuery();
+  let dateQuery = query.get("date");
+  
+  if (dateQuery === null) {
+    dateQuery = DEFAULT_DATE;
+  }
+
 
   const fetchPrices = (date) => {
+    history.push(`/priceByTime?date=${date}`)
     api.get(`/api/priceByTime?date=${date}`)
       .then((resp) => {
         if (resp.status !== 200) {
@@ -20,10 +36,11 @@ function PriceByTime() {
         setPrices([...resp.data.results]);
       })
   };
+
   useEffect(() => {
-    // TODO read date from query. 
-    fetchPrices(DEFAULT_DATE);
-  }, []);
+    // Read date from query. 
+    fetchPrices(dateQuery);
+  }, [dateQuery]);
 
   return (
     <div>
@@ -35,7 +52,7 @@ function PriceByTime() {
         autoComplete="off"
       >
         <Form.Item label="Date" name="date" rules={[{required: true}]}>
-          <DatePicker defaultValue={moment(DEFAULT_DATE, DATE_FORMAT)} format={DATE_FORMAT} />
+          <DatePicker showTime defaultValue={moment(DEFAULT_DATE, DATE_FORMAT)} format={DATE_FORMAT} />
         </Form.Item>
         <Form.Item wrapperCol={{offset: 8, span: 16}}>
           <Button type="primary" htmlType="submit">Submit</Button>
@@ -62,5 +79,5 @@ function PriceByTime() {
     </div>
   );
 }
-  
+
 export default PriceByTime;

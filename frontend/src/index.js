@@ -13,6 +13,7 @@ import 'antd/dist/antd.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "shards-ui/dist/css/shards.min.css"
 import PricePage from './pages/prices/PricePage';
+import PriceByTime from './pages/prices/PriceByTime';
 
 ReactDOM.render(
   <div>
@@ -32,6 +33,11 @@ ReactDOM.render(
 							path="/prices"
 							render={() => (
 								<PricePage />
+							)}/>
+				<Route exact
+							path="/priceByTime"
+							render={() => (
+								<PriceByTime />
 							)}/>
       </Switch>
     </Router>
