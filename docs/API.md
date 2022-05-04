@@ -105,7 +105,7 @@ Get the surge in prices.
 
 Return: 
 
-* 200: Success. Data will be the results of tuples in the database such that the prices surged by more than 50% over 5-hour windows. 
+* 200: Success. Data will be the results of tuples in the database such that the prices surged by more than 5% over 5-hour windows. 
 
 ## GET /api/aboveMovingAverage
 

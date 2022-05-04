@@ -254,12 +254,12 @@ async function surgeInPrice(req, res) {
                 SELECT *
                 FROM (
                         SELECT *,
-                                AVG(Close) OVER (ORDER BY CONVERT(date, DATETIME) RANGE BETWEEN INTERVAL 5 HOUR PRECEDING AND CURRENT ROW) AS prev_ma,
-                                AVG(Close) OVER (ORDER BY CONVERT(date, DATETIME) RANGE BETWEEN INTERVAL 10 HOUR PRECEDING AND INTERVAL 5 HOUR PRECEDING) AS cur_ma
+                                AVG(Close) OVER (ORDER BY CONVERT(date, DATETIME) RANGE BETWEEN INTERVAL 5 HOUR PRECEDING AND CURRENT ROW) AS cur_ma,
+                                AVG(Close) OVER (ORDER BY CONVERT(date, DATETIME) RANGE BETWEEN INTERVAL 10 HOUR PRECEDING AND INTERVAL 5 HOUR PRECEDING) AS prev_ma
                         FROM Crypto_price
                         WHERE Symbol = 'BTC/US'
                     ) cp
-                WHERE cp.cur_ma > cp.prev_ma * 1.5;
+                WHERE cp.cur_ma > cp.prev_ma * 1.05;
             `, 
             function (error, results, fields) {
                 if (error) {
