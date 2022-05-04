@@ -152,7 +152,7 @@ app.post( "/login",async (req, res) => {
 
 const mongoString = `mongodb+srv://550proj:${process.env.atlaspw}@users.h746o.mongodb.net/login?retryWrites=true&w=majority`
 
-mongoose.connect(mongoString, {useNewUrlParser: true})
+mongoose.connect(mongoString, {useNewUrlParser: true}, () => {})
 
 mongoose.connection.on("error", function(error) {
   console.log(error)

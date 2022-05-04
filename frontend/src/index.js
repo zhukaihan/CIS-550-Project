@@ -12,6 +12,7 @@ import 'antd/dist/antd.css';
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "shards-ui/dist/css/shards.min.css"
+import PricePage from './pages/prices/PricePage';
 
 ReactDOM.render(
   <div>
@@ -22,10 +23,15 @@ ReactDOM.render(
 							render={() => (
 								<LandingPage />
 							)}/>
-        <Route exact
+				<Route exact
 							path="/registration"
 							render={() => (
 								<RegistrationPage />
+							)}/>
+				<Route exact
+							path="/prices"
+							render={() => (
+								<PricePage />
 							)}/>
       </Switch>
     </Router>
