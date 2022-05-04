@@ -83,17 +83,17 @@ Return:
 
 * 200: Success. Data will be the results of tuples in the database from verified persons ordered by their followers count descending. 
 
-## GET /api/query7
+## GET /api/tweets5PercInc
 
-Get the result from query 7. 
+Get the result that are the tweets that tweeted within 1 hour of a 5% increase. 
 
 Return: 
 
 * 200: Success. Data will be the results of tuples in the database from the query 7 specified in SQL Queries document. 
 
-## GET /api/query8
+## GET /api/tweetsWhenHigh
 
-Get the result from query 8. 
+Get the tweets when bitcoin is priced between 4000-5000, and Eth is priced between 200-300. 
 
 Return: 
 

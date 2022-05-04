@@ -28,10 +28,10 @@ router.get('/user/:user', routes.userByUsername)
 // http://127.0.0.1:8080/api/user/CryptoND
 router.get('/tweetsByVerified', routes.tweetsByVerified)
 // http://127.0.0.1:8080/api/tweetsByVerified
-router.get('/query7', routes.query7)
-// http://127.0.0.1:8080/api/query7
-router.get('/query8', routes.query8)
-// http://127.0.0.1:8080/api/query8
+router.get('/tweets5PercInc', routes.tweets5PercInc)
+// http://127.0.0.1:8080/api/tweetsWhenHigh
+router.get('/tweetsWhenHigh', routes.tweetsWhenHigh)
+// http://127.0.0.1:8080/api/tweetsWhenHigh
 router.get('/surgeInPrice', routes.surgeInPrice)
 // http://127.0.0.1:8080/api/surgeInPrice
 router.get('/aboveMovingAverage', routes.aboveMovingAverage)

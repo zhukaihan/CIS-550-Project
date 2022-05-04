@@ -180,7 +180,7 @@ async function tweetsByVerified(req, res) {
     }
 }
 
-async function query7(req, res) {
+async function tweets5PercInc(req, res) {
     // const user = req.params.user ? req.params.user : null;
 
     if (
@@ -208,7 +208,7 @@ async function query7(req, res) {
     }
 }
 
-async function query8(req, res) {
+async function tweetsWhenHigh(req, res) {
     // const user = req.params.user ? req.params.user : null;
 
     if (
@@ -313,8 +313,8 @@ module.exports = {
     tweetByTime,
     userByUsername,
     tweetsByVerified,
-    query7,
-    query8,
+    tweets5PercInc,
+    tweetsWhenHigh,
     surgeInPrice,
     aboveMovingAverage,
 }
