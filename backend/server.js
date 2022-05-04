@@ -9,7 +9,7 @@ require('dotenv').config()
 const app = express();
 
 // whitelist localhost 3000
-app.use(cors({ credentials: true, origin: ['http://localhost:3000'] }));
+app.use(cors({ credentials: true, origin: ['http://localhost:3000', 'http://localhost:3001'] }));
 // app.use(cors());
 
 const router = express.Router()

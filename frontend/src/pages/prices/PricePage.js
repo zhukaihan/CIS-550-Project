@@ -13,6 +13,7 @@ const DATE_FORMAT = 'YYYY-MM-DD';
 function PricePage() {
   const [prices, setPrices] = useState([]);
   const [pricesByDateRangeData, setPricesByDateRangeData] = useState([]);
+  const [renderPricesByDateRangeData, setRenderPricesByDateRangeData] = useState(false);
 
   const fetchPrices = (startDate, endDate) => {
     api.get(`/api/priceByDateRange?startdate=${startDate}&enddate=${endDate}`)
@@ -28,11 +29,12 @@ function PricePage() {
   }, []);
 
   useEffect(()=>{
-      setPricesByDateRangeData({
-        name: "Portfolio",
-        color: "#ffffff",
-        items: prices.map((d) => ({ ...d, date: new Date(d.date) }))
-      })
+    setPricesByDateRangeData({
+      name: "Price By Date",
+      color: "#000000",
+      items: prices.map((d) => ({ ...d, date: new Date(d.Date), value: d.High }))
+    })
+    setRenderPricesByDateRangeData(true);
   }, [prices]);
 
   const dimensions = {
@@ -87,12 +89,14 @@ function PricePage() {
             <Column title="Volume_Currency" dataIndex="Volume_Currency" key="Volume_Currency" sorter= {(a, b) => a.Volume_Currency - b.Volume_Currency}/>
           </ColumnGroup>
       </Table>
-
       {
-        //   <PriceByDateRangeGraph
-        //       data={[prices]}
-        //       dimensions={dimensions}
-        //   />
+        // pricesByDateRangeData.map(e=>e.CLose)
+      }
+      {renderPricesByDateRangeData ? 
+          <PriceByDateRangeGraph
+              data={[pricesByDateRangeData]}
+              dimensions={dimensions}
+          /> : <div>no graph</div>
       }
     </div>
   );
