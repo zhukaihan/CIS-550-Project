@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import api from '../../api';
-import { Table } from 'antd';
+import { Table, Form, Input, Button, DatePicker } from 'antd';
 import PriceByDateRangeGraph from './graphs/PriceByDateRangeGraph';
 
 const { Column, ColumnGroup } = Table;
 
 function PricePage() {
-  const [startDate, setStartDate] = useState("2015-10-10");
-  const [endDate, setEndDate] = useState("2015-10-11");
   const [prices, setPrices] = useState([]);
   const [pricesByDateRangeData, setPricesByDateRangeData] = useState([]);
 
@@ -17,11 +15,11 @@ function PricePage() {
         if (resp.status !== 200) {
           return;
         }
-        setPrices(resp.data.results)
+        setPrices([...resp.data.results]);
       })
   };
   useEffect(() => {
-    fetchPrices(startDate, endDate);
+    fetchPrices("2015-10-10", "2015-10-11");
   }, []);
 
   useEffect(()=>{
@@ -45,6 +43,35 @@ function PricePage() {
 
   return (
     <div>
+      <Form name="basic"
+        labelCol={{
+          span: 8,
+        }}
+        wrapperCol={{
+          span: 16,
+        }}
+        initialValues={{
+          remember: true,
+        }}
+        onFinish={(input) => {fetchPrices(input.startDate.format('YYYY-MM-DD'), input.endDate.format('YYYY-MM-DD'))}}
+        autoComplete="off"
+      >
+      <Form.Item label="StartDate" name="startDate" rules={[{required: true}]}>
+        <DatePicker />
+      </Form.Item>
+      <Form.Item label="EndDate" name="endDate" rules={[{required: true}]}>
+        <DatePicker />
+      </Form.Item>
+
+      <Form.Item wrapperCol={{
+          offset: 8,
+          span: 16,
+        }}
+      >
+        <Button type="primary" htmlType="submit">Submit</Button>
+      </Form.Item>
+      </Form>
+
       <Table onRow={(record, rowIndex) => {
           // return {
           // onClick: event => {this.goToMatch(record.MatchId)}, // clicking a row takes the user to a detailed view of the match in the /matches page using the MatchId parameter  
