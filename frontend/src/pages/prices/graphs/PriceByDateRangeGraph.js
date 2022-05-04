@@ -32,22 +32,23 @@ const PriceByDateRangeGraph = ({ data, dimensions }) => {
      .attr("transform", `translate(0, ${height - margin.bottom})`)
      .call(xAxis);
    xAxisGroup.select(".domain").remove();
-   xAxisGroup.selectAll("line").attr("stroke", "rgba(255, 255, 255, 0.2)");
+   xAxisGroup.selectAll("line").attr("stroke", "rgba(0, 0, 0, 0.2)");
    xAxisGroup.selectAll("text")
      .attr("opacity", 0.5)
-     .attr("color", "white")
+     .attr("color", "black")
      .attr("font-size", "0.75rem");
    // Add Y grid lines with labels
    const yAxis = d3.axisLeft(yScale)
      .ticks(5)
      .tickSize(-width)
-     .tickFormat((val) => `${val}%`);
+    //  .tickFormat(val)
+    //  .tickFormat((val) => `${val}%`);
    const yAxisGroup = svg.append("g").call(yAxis);
    yAxisGroup.select(".domain").remove();
-   yAxisGroup.selectAll("line").attr("stroke", "rgba(255, 255, 255, 0.2)");
+   yAxisGroup.selectAll("line").attr("stroke", "rgba(0, 0, 0, 0.2)");
    yAxisGroup.selectAll("text")
      .attr("opacity", 0.5)
-     .attr("color", "white")
+     .attr("color", "black")
      .attr("font-size", "0.75rem");
     // Draw the lines
     const line = d3.line()
