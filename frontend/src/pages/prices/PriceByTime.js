@@ -2,20 +2,17 @@ import React, { useEffect, useState } from 'react';
 import api from '../../api';
 import { Table, Form, Input, Button, DatePicker } from 'antd';
 import moment from 'moment';
-import PriceByDateRangeGraph from './graphs/PriceByDateRangeGraph';
 
 const { Column, ColumnGroup } = Table;
 
-const DEFAULT_START_DATE = "2015-10-10";
-const DEFAULT_END_DATE = "2015-10-11";
-const DATE_FORMAT = 'YYYY-MM-DD';
+const DEFAULT_DATE = "2015-10-10 00:00:00";
+const DATE_FORMAT = 'YYYY-MM-DD HH:mm:ss';
 
-function PricePage() {
+function PriceByTime() {
   const [prices, setPrices] = useState([]);
-  const [pricesByDateRangeData, setPricesByDateRangeData] = useState([]);
 
-  const fetchPrices = (startDate, endDate) => {
-    api.get(`/api/priceByDateRange?startdate=${startDate}&enddate=${endDate}`)
+  const fetchPrices = (date) => {
+    api.get(`/api/priceByTime?date=${date}`)
       .then((resp) => {
         if (resp.status !== 200) {
           return;
@@ -24,27 +21,9 @@ function PricePage() {
       })
   };
   useEffect(() => {
-    fetchPrices(DEFAULT_START_DATE, DEFAULT_END_DATE);
+    // TODO read date from query. 
+    fetchPrices(DEFAULT_DATE);
   }, []);
-
-  useEffect(()=>{
-      setPricesByDateRangeData({
-        name: "Portfolio",
-        color: "#ffffff",
-        items: prices.map((d) => ({ ...d, date: new Date(d.date) }))
-      })
-  }, [prices]);
-
-  const dimensions = {
-    width: 600,
-    height: 300,
-    margin: {
-      top: 30,
-      right: 30,
-      bottom: 30,
-      left: 60
-    }
-  };
 
   return (
     <div>
@@ -52,25 +31,18 @@ function PricePage() {
         labelCol={{span: 8}}
         wrapperCol={{span: 16}}
         initialValues={{remember: true}}
-        onFinish={(input) => {fetchPrices(input.startDate.format(), input.endDate.format(DATE_FORMAT))}}
+        onFinish={(input) => {fetchPrices(input.date.format(DATE_FORMAT))}}
         autoComplete="off"
       >
-        <Form.Item label="StartDate" name="startDate" rules={[{required: true}]}>
-          <DatePicker defaultValue={moment(DEFAULT_START_DATE, DATE_FORMAT)} format={DATE_FORMAT} />
-        </Form.Item>
-        <Form.Item label="EndDate" name="endDate" rules={[{required: true}]}>
-          <DatePicker defaultValue={moment(DEFAULT_END_DATE, DATE_FORMAT)} format={DATE_FORMAT} />
+        <Form.Item label="Date" name="date" rules={[{required: true}]}>
+          <DatePicker defaultValue={moment(DEFAULT_DATE, DATE_FORMAT)} format={DATE_FORMAT} />
         </Form.Item>
         <Form.Item wrapperCol={{offset: 8, span: 16}}>
           <Button type="primary" htmlType="submit">Submit</Button>
         </Form.Item>
       </Form>
 
-      <Table onRow={(record, rowIndex) => {
-          return {
-            onClick: e => {window.location = `/priceByTime?time=${record.Date}`}, // clicking a row takes the user to a detailed view of the price given the time. 
-          };
-      }} dataSource={prices} pagination={{ pageSizeOptions:[5, 10], defaultPageSize: 5, showQuickJumper:true }}>
+      <Table dataSource={prices} pagination={{ pageSizeOptions:[5, 10], defaultPageSize: 5, showQuickJumper:true }}>
           <ColumnGroup title="Time">
             <Column title="Date" dataIndex="Date" key="Date" sorter = {(a, b) => a.Date.localeCompare(b.Date)}/>
             <Column title="Timestamp" dataIndex="Timestamp" key="Timestamp" sorter = {(a, b) => a.Timestamp.localeCompare(b.Timestamp)}/>
@@ -87,15 +59,8 @@ function PricePage() {
             <Column title="Volume_Currency" dataIndex="Volume_Currency" key="Volume_Currency" sorter= {(a, b) => a.Volume_Currency - b.Volume_Currency}/>
           </ColumnGroup>
       </Table>
-
-      {
-        //   <PriceByDateRangeGraph
-        //       data={[prices]}
-        //       dimensions={dimensions}
-        //   />
-      }
     </div>
   );
 }
   
-export default PricePage;
+export default PriceByTime;
