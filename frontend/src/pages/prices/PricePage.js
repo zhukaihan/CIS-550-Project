@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation, useHistory } from "react-router-dom";
 import api from '../../api';
 import { Table, Form, Input, Button, DatePicker } from 'antd';
 import moment from 'moment';
@@ -10,10 +11,27 @@ const DEFAULT_START_DATE = "2015-10-10";
 const DEFAULT_END_DATE = "2015-10-11";
 const DATE_FORMAT = 'YYYY-MM-DD';
 
+function useQuery() {
+  const { search } = useLocation();
+  return React.useMemo(() => new URLSearchParams(search), [search]);
+}
+
 function PricePage() {
   const [prices, setPrices] = useState([]);
   const [pricesByDateRangeData, setPricesByDateRangeData] = useState([]);
   const [renderPricesByDateRangeData, setRenderPricesByDateRangeData] = useState(false);
+  
+  let history = useHistory();
+  let query = useQuery();
+  let dateStartQuery = query.get("startdate");
+  let dateEndQuery = query.get("enddate");
+  
+  if (dateStartQuery === null) {
+    dateStartQuery = DEFAULT_START_DATE;
+  }
+  if (dateEndQuery === null) {
+    dateEndQuery = DEFAULT_END_DATE;
+  }
 
   const fetchPrices = (startDate, endDate) => {
     api.get(`/api/priceByDateRange?startdate=${startDate}&enddate=${endDate}`)
@@ -25,8 +43,8 @@ function PricePage() {
       })
   };
   useEffect(() => {
-    fetchPrices(DEFAULT_START_DATE, DEFAULT_END_DATE);
-  }, []);
+    fetchPrices(dateStartQuery, dateEndQuery);
+  }, [dateStartQuery, dateEndQuery]);
 
   useEffect(()=>{
     setPricesByDateRangeData({
@@ -53,15 +71,15 @@ function PricePage() {
       <Form name="basic"
         labelCol={{span: 8}}
         wrapperCol={{span: 16}}
-        initialValues={{remember: true}}
-        onFinish={(input) => {fetchPrices(input.startDate.format(), input.endDate.format(DATE_FORMAT))}}
+        initialValues={{remember: true, startDate: moment(dateStartQuery, DATE_FORMAT), endDate: moment(dateEndQuery, DATE_FORMAT)}}
+        onFinish={(input) => {history.push(`/prices?startdate=${input.startDate.format(DATE_FORMAT)}&enddate=${input.endDate.format(DATE_FORMAT)}`)}}
         autoComplete="off"
       >
         <Form.Item label="StartDate" name="startDate" rules={[{required: true}]}>
-          <DatePicker defaultValue={moment(DEFAULT_START_DATE, DATE_FORMAT)} format={DATE_FORMAT} />
+          <DatePicker format={DATE_FORMAT} />
         </Form.Item>
         <Form.Item label="EndDate" name="endDate" rules={[{required: true}]}>
-          <DatePicker defaultValue={moment(DEFAULT_END_DATE, DATE_FORMAT)} format={DATE_FORMAT} />
+          <DatePicker format={DATE_FORMAT} />
         </Form.Item>
         <Form.Item wrapperCol={{offset: 8, span: 16}}>
           <Button type="primary" htmlType="submit">Submit</Button>
