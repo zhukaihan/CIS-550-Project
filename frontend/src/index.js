@@ -15,6 +15,7 @@ import "shards-ui/dist/css/shards.min.css"
 import PricePage from './pages/prices/PricePage';
 import PriceByTime from './pages/prices/PriceByTime';
 import PriceSurges from './pages/prices/PriceSurges';
+import PriceAboveMA from './pages/prices/PriceAboveMA';
 
 ReactDOM.render(
   <div>
@@ -44,6 +45,11 @@ ReactDOM.render(
 							path="/priceSurges"
 							render={() => (
 								<PriceSurges />
+							)}/>
+				<Route exact
+							path="/priceAboveMA"
+							render={() => (
+								<PriceAboveMA />
 							)}/>
       </Switch>
     </Router>
