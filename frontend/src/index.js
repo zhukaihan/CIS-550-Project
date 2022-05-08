@@ -16,15 +16,23 @@ import PricePage from './pages/prices/PricePage';
 import PriceByTime from './pages/prices/PriceByTime';
 import PriceSurges from './pages/prices/PriceSurges';
 import PriceAboveMA from './pages/prices/PriceAboveMA';
+import MenuBar from './components/MenuBar';
+import LogOut from './pages/LogOut';
 
 ReactDOM.render(
   <div>
+		<MenuBar />
     <Router>
       <Switch>
         <Route exact
 							path="/"
 							render={() => (
 								<LandingPage />
+							)}/>
+				<Route exact
+							path="/logout"
+							render={() => (
+								<LogOut />
 							)}/>
 				<Route exact
 							path="/registration"
