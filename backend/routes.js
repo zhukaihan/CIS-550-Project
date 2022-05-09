@@ -163,7 +163,7 @@ async function tweetsByVerified(req, res) {
             `
                 SELECT * 
                 FROM Tweet 
-                WHERE user_verified IS True 
+                WHERE user_verified = 'True'
                 ORDER BY user_followers DESC
             `, 
             function (error, results, fields) {
