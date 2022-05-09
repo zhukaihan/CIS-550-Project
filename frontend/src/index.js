@@ -16,6 +16,9 @@ import PricePage from './pages/prices/PricePage';
 import PriceByTime from './pages/prices/PriceByTime';
 import PriceSurges from './pages/prices/PriceSurges';
 import PriceAboveMA from './pages/prices/PriceAboveMA';
+import Tweets from './pages/tweets/Tweets';
+import User from './pages/tweets/User';
+
 
 ReactDOM.render(
   <div>
@@ -45,6 +48,16 @@ ReactDOM.render(
 							path="/priceSurges"
 							render={() => (
 								<PriceSurges />
+							)}/>
+				<Route exact
+							path="/User"
+							render={() => (
+								<User />
+							)}/>
+				<Route exact
+							path="/Tweets"
+							render={() => (
+								<Tweets/>
 							)}/>
 				<Route exact
 							path="/priceAboveMA"
