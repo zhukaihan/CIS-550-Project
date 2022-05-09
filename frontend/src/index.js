@@ -22,12 +22,19 @@ import User from './pages/tweets/User';
 
 ReactDOM.render(
   <div>
+		<MenuBar />
     <Router>
+	<Auth0ProviderHist>
       <Switch>
         <Route exact
 							path="/"
 							render={() => (
 								<LandingPage />
+							)}/>
+				<Route exact
+							path="/logout"
+							render={() => (
+								<LogOut />
 							)}/>
 				<Route exact
 							path="/registration"
@@ -65,6 +72,7 @@ ReactDOM.render(
 								<PriceAboveMA />
 							)}/>
       </Switch>
+	  </Auth0ProviderHist>
     </Router>
   </div>,
   document.getElementById('root')

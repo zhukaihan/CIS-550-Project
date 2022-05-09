@@ -2,6 +2,8 @@ import { message, Typography } from 'antd';
 import React, { useState } from 'react';
 import { Button, Form, FormGroup, FormInput } from "shards-react";
 import { loginUser } from '../fetcher';
+import LoginButton from './LoginButton';
+import LogoutButton from './LogoutButton';
 const { Title } = Typography;
 
 
@@ -63,10 +65,8 @@ function LoginForm() {
                 <label>Don't have an account?</label>
                 <a href='/registration'> Create one!</a>
             </FormGroup>
-            <FormGroup>
-                <label>Forgot Password?</label>
-                <a href='/resetpassword'> Reset</a>
-            </FormGroup>
+            <LoginButton/>
+            <LogoutButton/>
 
         </div>
     );

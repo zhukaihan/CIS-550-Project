@@ -158,7 +158,7 @@ async function tweetsByVerified(req, res) {
             `
                 SELECT * 
                 FROM Tweet 
-                WHERE user_verified IS True 
+                WHERE user_verified = 'True'
                 ORDER BY user_followers DESC
             `, 
             function (error, results, fields) {
@@ -170,8 +170,8 @@ async function tweetsByVerified(req, res) {
                 }
             }
         );
-    } else {
-        res.json({ error: "Invalid query. " });
+    // } else {
+    //     res.json({ error: "Invalid query. " });
     }
 }
 
@@ -198,8 +198,8 @@ async function tweets5PercInc(req, res) {
                 }
             }
         );
-    } else {
-        res.json({ error: "Invalid query. " });
+    // } else {
+    //     res.json({ error: "Invalid query. " });
     }
 }
 
@@ -233,8 +233,8 @@ async function tweetsWhenHigh(req, res) {
                 }
             }
         );
-    } else {
-        res.json({ error: "Invalid query. " });
+    // } else {
+    //     res.json({ error: "Invalid query. " });
     }
 }
 
@@ -265,8 +265,8 @@ async function surgeInPrice(req, res) {
                 }
             }
         );
-    } else {
-        res.json({ error: "Invalid query. " });
+    // } else {
+    //     res.json({ error: "Invalid query. " });
     }
 }
 
@@ -296,8 +296,8 @@ async function aboveMovingAverage(req, res) {
                 }
             }
         );
-    } else {
-        res.json({ error: "Invalid query. " });
+    // } else {
+    //     res.json({ error: "Invalid query. " });
     }
 }
 

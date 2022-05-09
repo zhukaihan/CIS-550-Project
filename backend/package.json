@@ -16,7 +16,7 @@
         "jest": "^27.1.0"
     },
     "scripts": {
-        "test": "jest --coverage",
+        "test": "jest --coverage --runInBand",
         "start": "nodemon server.js"
     }
 }

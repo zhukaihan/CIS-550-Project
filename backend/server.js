@@ -163,8 +163,10 @@ mongoose.connection.on("open", function() {
   console.log("Connected to MongoDB database.")
 })
 
-app.listen(process.env.server_port, () => {
+if (process.env.NODE_ENV !== "test") {
+  app.listen(process.env.server_port, () => {
     console.log(`Server running at port ${process.env.server_port}`);
-});
+  });
+}
 
 module.exports = app;
