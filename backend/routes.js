@@ -175,8 +175,8 @@ async function tweetsByVerified(req, res) {
                 }
             }
         );
-    } else {
-        res.json({ error: "Invalid query. " });
+    // } else {
+    //     res.json({ error: "Invalid query. " });
     }
 }
 
@@ -203,8 +203,8 @@ async function tweets5PercInc(req, res) {
                 }
             }
         );
-    } else {
-        res.json({ error: "Invalid query. " });
+    // } else {
+    //     res.json({ error: "Invalid query. " });
     }
 }
 
@@ -238,8 +238,8 @@ async function tweetsWhenHigh(req, res) {
                 }
             }
         );
-    } else {
-        res.json({ error: "Invalid query. " });
+    // } else {
+    //     res.json({ error: "Invalid query. " });
     }
 }
 
@@ -270,8 +270,8 @@ async function surgeInPrice(req, res) {
                 }
             }
         );
-    } else {
-        res.json({ error: "Invalid query. " });
+    // } else {
+    //     res.json({ error: "Invalid query. " });
     }
 }
 
@@ -301,8 +301,8 @@ async function aboveMovingAverage(req, res) {
                 }
             }
         );
-    } else {
-        res.json({ error: "Invalid query. " });
+    // } else {
+    //     res.json({ error: "Invalid query. " });
     }
 }
 

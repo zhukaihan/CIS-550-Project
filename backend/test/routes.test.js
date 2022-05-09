@@ -65,4 +65,31 @@ describe('Test routes', () => {
     expect(response.status).toEqual(200);
   });
 
+
+
+  test('Endpoint GET /priceByDateRange err no enddate', async () => {
+    const response = await request(webapp).get('/api/priceByDateRange?startdate=2015-10-10').send();
+    expect(response.body.error).toEqual("Invalid query. ");
+  });
+
+  test('Endpoint GET /priceByTime err no date', async () => {
+    const response = await request(webapp).get('/api/priceByTime').send();
+    expect(response.body.error).toEqual("Invalid query. ");
+  });
+
+  test('Endpoint GET /tweetByDateRange err no enddate', async () => {
+    const response = await request(webapp).get('/api/tweetByDateRange?startdate=2021-02-10').send();
+    expect(response.body.error).toEqual("Invalid query. ");
+  });
+
+  test('Endpoint GET /tweetByTime err', async () => {
+    const response = await request(webapp).get('/api/tweetByTime').send();
+    expect(response.body.error).toEqual("Invalid query. ");
+  });
+
+  // test('Endpoint GET /user/:user err no user', async () => {
+  //   const response = await request(webapp).get('/api/user').send();
+  //   expect(response.body.error).toEqual("Invalid query. ");
+  // });
+
 });
