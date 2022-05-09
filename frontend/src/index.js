@@ -19,10 +19,14 @@ import PriceAboveMA from './pages/prices/PriceAboveMA';
 import MenuBar from './components/MenuBar';
 import LogOut from './pages/LogOut';
 
+import Auth0ProviderHist from './pages/auth/Auth0ProviderHist';
+require('dotenv').config()
+
 ReactDOM.render(
   <div>
 		<MenuBar />
     <Router>
+	<Auth0ProviderHist>
       <Switch>
         <Route exact
 							path="/"
@@ -60,6 +64,7 @@ ReactDOM.render(
 								<PriceAboveMA />
 							)}/>
       </Switch>
+	  </Auth0ProviderHist>
     </Router>
   </div>,
   document.getElementById('root')

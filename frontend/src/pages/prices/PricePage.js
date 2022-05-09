@@ -4,6 +4,8 @@ import api from '../../api';
 import { Table, Form, Input, Button, DatePicker } from 'antd';
 import moment from 'moment';
 import PriceByDateRangeGraph from './graphs/PriceByDateRangeGraph';
+import {useAuth0} from '@auth0/auth0-react';
+  
 
 const { Column, ColumnGroup } = Table;
 
@@ -17,6 +19,7 @@ function useQuery() {
 }
 
 function PricePage() {
+  const {isAuthenticated} = useAuth0()
   const [prices, setPrices] = useState([]);
   const [pricesByDateRangeData, setPricesByDateRangeData] = useState([]);
   const [renderPricesByDateRangeData, setRenderPricesByDateRangeData] = useState(false);
@@ -65,8 +68,7 @@ function PricePage() {
       left: 60
     }
   };
-
-  return (
+    return (
     <div>
       <Form name="basic"
         labelCol={{span: 8}}

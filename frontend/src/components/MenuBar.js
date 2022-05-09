@@ -7,8 +7,11 @@ import {
   NavLink
 } from "shards-react";
 
+import {useAuth0} from '@auth0/auth0-react';
+  
 function MenuBar() {
-  const loggedIn = sessionStorage.getItem("email");
+  const {isAuthenticated} = useAuth0()
+  const loggedIn = sessionStorage.getItem("email") || isAuthenticated;
   return(
     <Navbar type="dark" theme="primary" expand="md">
       <NavbarBrand href="/">CIS 550</NavbarBrand>
