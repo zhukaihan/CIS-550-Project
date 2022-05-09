@@ -5,6 +5,7 @@ import { Table, Form, Input, Button, DatePicker } from 'antd';
 import moment from 'moment';
 import PriceByDateRangeGraph from './graphs/PriceByDateRangeGraph';
 import {useAuth0} from '@auth0/auth0-react';
+
   
 
 const { Column, ColumnGroup } = Table;
