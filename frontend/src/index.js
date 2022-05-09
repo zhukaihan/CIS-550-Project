@@ -21,6 +21,11 @@ import PriceAboveMA from './pages/prices/PriceAboveMA';
 import Tweets from './pages/tweets/Tweets';
 import User from './pages/tweets/User';
 
+import Auth0ProviderHist from './pages/auth/Auth0ProviderHist';
+import MenuBar from './components/MenuBar';
+import LogOut from './pages/LogOut';
+
+
 
 ReactDOM.render(
   <div>
