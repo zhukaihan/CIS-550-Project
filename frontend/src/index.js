@@ -5,7 +5,9 @@ import {
 	Route,
 	Switch
 } from 'react-router-dom';
-
+import MenuBar from './components/MenuBar';
+import Auth0ProviderHist from './pages/auth/Auth0ProviderHist';
+import LogOut from './pages/LogOut'
 import LandingPage from './pages/LandingPage';
 import RegistrationPage from './pages/RegistrationPage';
 import 'antd/dist/antd.css';

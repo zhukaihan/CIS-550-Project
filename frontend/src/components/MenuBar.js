@@ -43,6 +43,16 @@ function MenuBar() {
             </NavLink>
           </NavItem>
           <NavItem>
+            <NavLink active href="/Tweets">
+              Tweets
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink active href="/User">
+              Twitter Users
+            </NavLink>
+          </NavItem>
+          <NavItem>
             <NavLink active href="/logout">
               Logout
             </NavLink>

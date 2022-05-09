@@ -72,7 +72,7 @@ class User extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            userName: "",
+            userName: window.location.search ? window.location.search.substring(1).split('=')[1]:'',
             userResults: [],
         }
 
@@ -88,10 +88,12 @@ class User extends React.Component {
     updateSearchResults() {
         getUsersSearch(this.state.userName).then(res => {
             this.setState({ userResults: res.results })
+            console.log(res)
         })
     }
 
     componentDidMount() {
+
         getUsersSearch(this.state.userName).then(res => {
             this.setState({ userResults: res.results })
         })
@@ -104,12 +106,12 @@ class User extends React.Component {
 
                 <Form style={{ width: '80vw', margin: '0 auto', marginTop: '5vh' }}>
                     <Row>
-                        <Col flex={2}><FormGroup style={{ width: '20vw', margin: '0 auto' }}>
+                        <Col flex={2}><FormGroup style={{ width: '15vw', margin: '0 auto' }}>
                             <label>Username</label>
                             <FormInput placeholder="User Name" value={this.state.userName} onChange={this.handleUserNameQueryChange} />
                         </FormGroup></Col>
                     </Row>
-                    <Col flex={2}><FormGroup style={{ width: '10vw' }}>
+                    <Col flex={2}><FormGroup style={{ width: '10vw', margin: '0 auto'  }}>
                             <Button style={{ marginTop: '4vh' }} onClick={this.updateSearchResults}>Search</Button>
                     </FormGroup></Col>
                     <br></br>
@@ -120,16 +122,16 @@ class User extends React.Component {
 
                 <Table style={{ width: '80vw', margin: '0 auto', marginTop: '5vh' }} onRow={(record, rowIndex) => {
                     return {
-                        onClick: e => {window.location = `/priceByTime?date=${record.Date}`},
+                        onClick: e => {window.location = `/Tweets?username=${record.user_name}`},
                     };
                 }} dataSource={this.state.userResults} pagination={{ pageSizeOptions:[5, 10], defaultPageSize: 5, showQuickJumper:true }}>
-                    <Col title="User" dataIndex="user_name" key="user_name" sorter = {(a, b) => a.Date.localeCompare(b.Date)}/> 
-                    <Col title="User Description" dataIndex="user_description" key="user_description" />
+                    <Col title="Username" dataIndex="user_name" key="user_name" sorter = {(a, b) => a.Date.localeCompare(b.Date)}/> 
                     <Col title="User Location" dataIndex="user_location" key="user_location" />
                     <Col title="User Created" dataIndex="user_created" key="user_created" />
                     <Col title="User Followers" dataIndex="user_followers" key="user_followers" />
                     <Col title="User Friends" dataIndex="user_friends" key="user_friends" />
-                    <Col title="Tweet" dataIndex="text" key="text"/>
+                    <Col title="User Favorites" dataIndex="user_favourites" key="user_favourites" />
+                    <Col title="UserVerified" dataIndex="user_verified" key="user_verified"/>
                 </Table>
 
             </div>
