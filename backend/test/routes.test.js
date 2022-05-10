@@ -25,8 +25,13 @@ describe('Test routes', () => {
     expect(response.status).toEqual(200);
   });
 
-  test('Endpoint GET /tweetByDateRange', async () => {
-    const response = await request(webapp).get('/api/tweetByDateRange?startdate=2021-02-10&enddate=2021-02-12').send();
+  test('Endpoint GET /tweets no userName', async () => {
+    const response = await request(webapp).get('/api/tweets?startDate=2021-02-10&endDate=2021-02-12').send();
+    expect(response.status).toEqual(200);
+  });
+
+  test('Endpoint GET /tweets with userName', async () => {
+    const response = await request(webapp).get('/api/tweets?userName=CryptoSquawk&startDate=2021-02-08&endDate=2021-02-09').send();
     expect(response.status).toEqual(200);
   });
 
@@ -77,8 +82,8 @@ describe('Test routes', () => {
     expect(response.body.error).toEqual("Invalid query. ");
   });
 
-  test('Endpoint GET /tweetByDateRange err no enddate', async () => {
-    const response = await request(webapp).get('/api/tweetByDateRange?startdate=2021-02-10').send();
+  test('Endpoint GET /tweets err no enddate', async () => {
+    const response = await request(webapp).get('/api/tweets?startdate=2021-02-10').send();
     expect(response.body.error).toEqual("Invalid query. ");
   });
 
@@ -86,10 +91,5 @@ describe('Test routes', () => {
     const response = await request(webapp).get('/api/tweetByTime').send();
     expect(response.body.error).toEqual("Invalid query. ");
   });
-
-  // test('Endpoint GET /user/:user err no user', async () => {
-  //   const response = await request(webapp).get('/api/user').send();
-  //   expect(response.body.error).toEqual("Invalid query. ");
-  // });
 
 });

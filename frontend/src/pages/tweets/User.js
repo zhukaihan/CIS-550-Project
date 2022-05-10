@@ -71,8 +71,9 @@ const tweetsColumns = [
 class User extends React.Component {
     constructor(props) {
         super(props)
+        const searchParams = new URLSearchParams(window.location.search);
         this.state = {
-            userName: window.location.search ? window.location.search.substring(1).split('=')[1]:'',
+            userName: searchParams.has("username") ? searchParams.get("username") : "",//window.location.search ? window.location.search.substring(1).split('=')[1]:'',
             userResults: [],
         }
 

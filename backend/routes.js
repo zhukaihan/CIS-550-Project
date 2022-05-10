@@ -77,11 +77,15 @@ async function tweetsSearch(req, res) {
         req.query.startDate && 
         req.query.endDate
     ) {
+        var usernameQuery = "";
+        if (req.query.userName && req.query.userName.length > 0) {
+            usernameQuery = `and user_name = '${req.query.userName}'`;
+        }
         connection.query(
             `
                 SELECT * 
                 FROM tweet_info
-                WHERE Date between '${req.query.startDate}' and '${req.query.endDate}'
+                WHERE (Date between '${req.query.startDate}' and '${req.query.endDate}') ${usernameQuery}
                 LIMIT 100
             `, 
             function (error, results, fields) {
@@ -125,13 +129,13 @@ async function tweetByTime(req, res) {
 }
 
 async function userByUsername(req, res) {
-    const user = req.params.userName ? req.params.user : null;
+    const user = req.params.user ? req.params.user : null;
 
-    if (true) {
-        console.log("Hi")
+    if (user) { // There will always be req.params.user if this function is called. Because of routing specification: /user/:user. 
         connection.query(
-            `   SELECT * 
+            `   SELECT DISTINCT * 
                 FROM user_info 
+                WHERE user_name = '${user}'
                 LIMIT 10
             `, 
             function (error, results, fields) {
@@ -143,8 +147,6 @@ async function userByUsername(req, res) {
                 }
             }
         );
-    } else {
-        res.json({ error: "Invalid query. " });
     }
 }
 
