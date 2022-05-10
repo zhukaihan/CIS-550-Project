@@ -190,7 +190,7 @@ async function tweets5PercInc(req, res) {
             `
                 SELECT tweet.text
                 FROM Tweet tweet
-                WHERE SUBSTRING(tweet.Date, 1, 13) in (SELECT SUBSTRING(price.Date, 1, 13)
+                WHERE tweet.datehour in (SELECT price.datehour
                 FROM Crypto_price price
                 WHERE price.Symbol='BTC/US' AND price.High>price.Low*1.05);
             `, 
@@ -218,11 +218,11 @@ async function tweetsWhenHigh(req, res) {
             `
                 SELECT DISTINCT tweet.text
                 FROM Tweet tweet
-                WHERE SUBSTRING(tweet.Date, 1, 13) in (SELECT BTC.BTCDates as Dates
-                FROM (SELECT SUBSTRING(btcprice.Date, 1, 13) AS BTCDates
+                WHERE tweet.datehour in (SELECT BTC.BTCDates as Dates
+                FROM (SELECT btcprice.datehour AS BTCDates
                 FROM Crypto_price btcprice
                 WHERE btcprice.High < 5000 AND btcprice.High>4500 AND btcprice.Symbol='BTC/US') AS BTC,
-                    (SELECT SUBSTRING(ethprice.Date, 1, 13) AS ETHDates
+                    (SELECT ethprice.datehour AS ETHDates
                 FROM Crypto_price ethprice
                 WHERE ethprice.High < 300 AND ethprice.High>200 AND ethprice.Symbol='ETH/US') AS ETH
                 WHERE BTC.BTCDates = ETH.ETHDates)
@@ -254,8 +254,8 @@ async function surgeInPrice(req, res) {
                 SELECT *
                 FROM (
                         SELECT *,
-                                AVG(Close) OVER (ORDER BY CONVERT(date, DATETIME) RANGE BETWEEN INTERVAL 5 HOUR PRECEDING AND CURRENT ROW) AS cur_ma,
-                                AVG(Close) OVER (ORDER BY CONVERT(date, DATETIME) RANGE BETWEEN INTERVAL 10 HOUR PRECEDING AND INTERVAL 5 HOUR PRECEDING) AS prev_ma
+                                AVG(Close) OVER (ORDER BY time RANGE BETWEEN INTERVAL 5 HOUR PRECEDING AND CURRENT ROW) AS cur_ma,
+                                AVG(Close) OVER (ORDER BY time RANGE BETWEEN INTERVAL 10 HOUR PRECEDING AND INTERVAL 5 HOUR PRECEDING) AS prev_ma
                         FROM Crypto_price
                         WHERE Symbol = 'BTC/US'
                     ) cp
@@ -286,7 +286,7 @@ async function aboveMovingAverage(req, res) {
                 SELECT *
                 FROM (
                         SELECT *,
-                                AVG(Close) OVER (ORDER BY CONVERT(date, DATETIME) RANGE BETWEEN INTERVAL 5 HOUR PRECEDING AND CURRENT ROW) AS ma
+                                AVG(Close) OVER (ORDER BY time RANGE BETWEEN INTERVAL 5 HOUR PRECEDING AND CURRENT ROW) AS ma
                         FROM Crypto_price
                         WHERE Symbol = 'BTC/US'
                     ) cp

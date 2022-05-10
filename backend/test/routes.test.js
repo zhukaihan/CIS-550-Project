@@ -10,7 +10,7 @@ afterAll(async () => {
   server.close()
 });
 
-jest.setTimeout(5 * 60 * 1000);
+jest.setTimeout(10 * 60 * 1000);
 describe('Test routes', () => {
   beforeAll(async () => {
   });
