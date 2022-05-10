@@ -84,7 +84,7 @@ async function tweetsSearch(req, res) {
         connection.query(
             `
                 SELECT * 
-                FROM tweet_info
+                FROM tweet_info_clean
                 WHERE (Date between '${req.query.startDate}' and '${req.query.endDate}') ${usernameQuery}
                 LIMIT 100
             `, 
@@ -136,7 +136,7 @@ async function userByUsername(req, res) {
             `   SELECT DISTINCT * 
                 FROM user_info 
                 WHERE user_name = '${user}'
-                LIMIT 10
+                LIMIT 1
             `, 
             function (error, results, fields) {
                 if (error) {
