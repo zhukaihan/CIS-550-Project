@@ -86,15 +86,9 @@ async function tweetsSearch(req, res) {
         connection.query(
             `
                 SELECT * 
-<<<<<<< HEAD
                 FROM tweet_info_clean
                 WHERE Date between '${req.query.startDate}' and '${req.query.endDate}'
                 LIMIT 2000
-=======
-                FROM tweet_info
-                WHERE (Date between '${req.query.startDate}' and '${req.query.endDate}') ${usernameQuery}
-                LIMIT 100
->>>>>>> 0600dc990d65289a7f5e1ffb34ff3df5a78b2d58
             `, 
             function (error, results, fields) {
                 if (error) {
@@ -156,7 +150,6 @@ async function tweetByTime(req, res) {
 }
 
 async function userByUsername(req, res) {
-<<<<<<< HEAD
     console.log("here")
     if (req.query.user) {
         connection.query(
@@ -165,16 +158,7 @@ async function userByUsername(req, res) {
                 WHERE user_name LIKE "${req.query.user}" 
                 ORDER BY date DESC
                 LIMIT 1
-=======
     const user = req.params.user ? req.params.user : null;
-
-    if (user) { // There will always be req.params.user if this function is called. Because of routing specification: /user/:user. 
-        connection.query(
-            `   SELECT DISTINCT * 
-                FROM user_info 
-                WHERE user_name = '${user}'
-                LIMIT 10
->>>>>>> 0600dc990d65289a7f5e1ffb34ff3df5a78b2d58
             `, 
             function (error, results, fields) {
                 if (error) {
@@ -185,7 +169,6 @@ async function userByUsername(req, res) {
                 }
             }
         );
-<<<<<<< HEAD
     } else {
         connection.query(
             `   SELECT * 
@@ -200,8 +183,6 @@ async function userByUsername(req, res) {
                 }
             }
         );
-=======
->>>>>>> 0600dc990d65289a7f5e1ffb34ff3df5a78b2d58
     }
 }
 
