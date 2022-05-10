@@ -22,7 +22,8 @@ router.get('/priceByDateRange', routes.priceByDateRange)
 router.get('/priceByTime', routes.priceByTime)
 // http://127.0.0.1:8080/api/priceByTime?date=2015-10-08%2013:00:00
 router.get('/tweets', routes.tweetsSearch)
-// http://127.0.0.1:8080/api/tweetByDateRange?startdate=http://127.0.0.1:8080/tweetByTime?date=2021-02-10&enddate=2021-02-11
+// http://127.0.0.1:8080/api/tweets?startDate=2021-02-10&endDate=2021-02-12
+// http://127.0.0.1:8080/api/tweets?userName=user1&startDate=2021-02-10&endDate=2021-02-12
 router.get('/tweetByTime', routes.tweetByTime)
 // http://127.0.0.1:8080/api/tweetByTime?date=2021-02-10%2023:59:04
 router.get('/user', routes.userByUsername)

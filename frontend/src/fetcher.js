@@ -37,7 +37,7 @@ const getTweetsSearch = async (userName, startDate, endDate) => {
 }
 
 const getUsersSearch = async (username) => {
-    var res = await fetch(`http://${config.server_host}:${config.server_port}/api/user?user=${username}`, {
+    var res = await fetch(`http://${config.server_host}:${config.server_port}/api/user/${username}`, {
         method: 'GET',
     })
     return res.json()

@@ -35,14 +35,15 @@ Return:
 * 200: Success. Data will be the results of tuples in the database. 
 * Error: Invalid query. 
 
-## GET /api/tweetByDateRange
+## GET /api/tweets
 
 Get the tweets by date range. 
 
 Query params: 
 
-* `startdate`: The start date of the range. Ex. `2012-10-10`
-* `enddate`: The end date of the range. Ex. `2012-10-11`
+* `userName` OPTIONAL: The username to search the tweets. Ex. `user1`
+* `startDate`: The start date of the range. Ex. `2012-10-10`
+* `endDate`: The end date of the range. Ex. `2012-10-11`
 
 Return: 
 
