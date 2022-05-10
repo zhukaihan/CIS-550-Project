@@ -72,17 +72,19 @@ async function priceByTime(req, res) {
 }
 
 async function tweetsSearch(req, res) {
+    const userName = req.query.userName ? req.query.userName : ""
 
     if (
         req.query.startDate && 
-        req.query.endDate
+        req.query.endDate &&
+        userName == ""
     ) {
         connection.query(
             `
                 SELECT * 
-                FROM tweet_info
+                FROM tweet_info_clean
                 WHERE Date between '${req.query.startDate}' and '${req.query.endDate}'
-                LIMIT 100
+                LIMIT 2000
             `, 
             function (error, results, fields) {
                 if (error) {
@@ -92,6 +94,25 @@ async function tweetsSearch(req, res) {
                 }
             }
         );
+    } else if (
+        req.query.startDate && 
+        req.query.endDate
+    ) {
+        connection.query(
+            `
+                SELECT * 
+                FROM tweet_info_clean
+                WHERE user_name = '${userName}' AND Date between '${req.query.startDate}' and '${req.query.endDate}'
+                LIMIT 2000
+            `, 
+            function (error, results, fields) {
+                if (error) {
+                    res.json({ error: error })
+                } else if (results) {
+                    res.json({ results: results })
+                }
+            }
+        );  
     } else {
         res.json({ error: "Invalid query. " });
     }
@@ -125,14 +146,14 @@ async function tweetByTime(req, res) {
 }
 
 async function userByUsername(req, res) {
-    const user = req.params.userName ? req.params.user : null;
-
-    if (true) {
-        console.log("Hi")
+    console.log("here")
+    if (req.query.user) {
         connection.query(
             `   SELECT * 
-                FROM user_info 
-                LIMIT 10
+                FROM user_info
+                WHERE user_name LIKE "${req.query.user}" 
+                ORDER BY date DESC
+                LIMIT 1
             `, 
             function (error, results, fields) {
                 if (error) {
@@ -144,7 +165,19 @@ async function userByUsername(req, res) {
             }
         );
     } else {
-        res.json({ error: "Invalid query. " });
+        connection.query(
+            `   SELECT * 
+                FROM user_info
+                LIMIT 100
+            `, 
+            function (error, results, fields) {
+                if (error) {
+                    res.json({ error: error })
+                } else if (results) {
+                    res.json({ results: results })
+                }
+            }
+        );
     }
 }
 

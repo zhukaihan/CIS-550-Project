@@ -25,7 +25,7 @@ router.get('/tweets', routes.tweetsSearch)
 // http://127.0.0.1:8080/api/tweetByDateRange?startdate=http://127.0.0.1:8080/tweetByTime?date=2021-02-10&enddate=2021-02-11
 router.get('/tweetByTime', routes.tweetByTime)
 // http://127.0.0.1:8080/api/tweetByTime?date=2021-02-10%2023:59:04
-router.get('/user/:user', routes.userByUsername)
+router.get('/user', routes.userByUsername)
 // http://127.0.0.1:8080/api/user/CryptoND
 router.get('/tweetsByVerified', routes.tweetsByVerified)
 // http://127.0.0.1:8080/api/tweetsByVerified
