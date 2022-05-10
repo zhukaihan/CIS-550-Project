@@ -16,12 +16,13 @@ const router = express.Router()
 app.use('/api', router);
 
 // Routes. 
+router.get('test', (req, res) => { console.log('here')})
 router.get('/priceByDateRange', routes.priceByDateRange)
 // http://127.0.0.1:8080/api/priceByDateRange?startdate=2015-10-10&enddate=2015-10-11
 router.get('/priceByTime', routes.priceByTime)
 // http://127.0.0.1:8080/api/priceByTime?date=2015-10-08%2013:00:00
-router.get('/tweetByDateRange', routes.tweetByDateRange)
-// http://127.0.0.1:8080/api/tweetByDateRange?startdate=2021-02-10&enddate=2021-02-12
+router.get('/tweets', routes.tweetsSearch)
+// http://127.0.0.1:8080/api/tweetByDateRange?startdate=http://127.0.0.1:8080/tweetByTime?date=2021-02-10&enddate=2021-02-11
 router.get('/tweetByTime', routes.tweetByTime)
 // http://127.0.0.1:8080/api/tweetByTime?date=2021-02-10%2023:59:04
 router.get('/user/:user', routes.userByUsername)

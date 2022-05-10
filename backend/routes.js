@@ -71,24 +71,21 @@ async function priceByTime(req, res) {
     }
 }
 
-async function tweetByDateRange(req, res) {
-    // const league = req.params.league ? req.params.league : 'D1'
+async function tweetsSearch(req, res) {
 
     if (
-        req.query.startdate && 
-        req.query.enddate
+        req.query.startDate && 
+        req.query.endDate
     ) {
-        let startdate = req.query.startdate;
-        let enddate = req.query.enddate;
         connection.query(
             `
                 SELECT * 
-                FROM Tweet 
-                WHERE Date >= '${startdate}' AND Date <= '${enddate}'
+                FROM tweet_info
+                WHERE Date between '${req.query.startDate}' and '${req.query.endDate}'
+                LIMIT 100
             `, 
             function (error, results, fields) {
                 if (error) {
-                    console.log(error)
                     res.json({ error: error })
                 } else if (results) {
                     res.json({ results: results })
@@ -128,16 +125,14 @@ async function tweetByTime(req, res) {
 }
 
 async function userByUsername(req, res) {
-    const user = req.params.user ? req.params.user : null;
+    const user = req.params.userName ? req.params.user : null;
 
-    if (
-        user
-    ) {
+    if (true) {
+        console.log("Hi")
         connection.query(
-            `
-                SELECT * 
-                FROM Tweet 
-                WHERE user_name = '${user}'
+            `   SELECT * 
+                FROM user_info 
+                LIMIT 10
             `, 
             function (error, results, fields) {
                 if (error) {
@@ -309,7 +304,7 @@ async function aboveMovingAverage(req, res) {
 module.exports = {
     priceByDateRange,
     priceByTime,
-    tweetByDateRange,
+    tweetsSearch,
     tweetByTime,
     userByUsername,
     tweetsByVerified,

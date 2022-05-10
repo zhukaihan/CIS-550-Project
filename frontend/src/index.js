@@ -5,7 +5,9 @@ import {
 	Route,
 	Switch
 } from 'react-router-dom';
-
+import MenuBar from './components/MenuBar';
+import Auth0ProviderHist from './pages/auth/Auth0ProviderHist';
+import LogOut from './pages/LogOut'
 import LandingPage from './pages/LandingPage';
 import RegistrationPage from './pages/RegistrationPage';
 import 'antd/dist/antd.css';
@@ -16,13 +18,20 @@ import PricePage from './pages/prices/PricePage';
 import PriceByTime from './pages/prices/PriceByTime';
 import PriceSurges from './pages/prices/PriceSurges';
 import PriceAboveMA from './pages/prices/PriceAboveMA';
+import Tweets from './pages/tweets/Tweets';
+import User from './pages/tweets/User';
+
+import Auth0ProviderHist from './pages/auth/Auth0ProviderHist';
 import MenuBar from './components/MenuBar';
 import LogOut from './pages/LogOut';
+
+
 
 ReactDOM.render(
   <div>
 		<MenuBar />
     <Router>
+	<Auth0ProviderHist>
       <Switch>
         <Route exact
 							path="/"
@@ -55,11 +64,22 @@ ReactDOM.render(
 								<PriceSurges />
 							)}/>
 				<Route exact
+							path="/User"
+							render={() => (
+								<User />
+							)}/>
+				<Route exact
+							path="/Tweets"
+							render={() => (
+								<Tweets/>
+							)}/>
+				<Route exact
 							path="/priceAboveMA"
 							render={() => (
 								<PriceAboveMA />
 							)}/>
       </Switch>
+	  </Auth0ProviderHist>
     </Router>
   </div>,
   document.getElementById('root')

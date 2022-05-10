@@ -29,6 +29,20 @@ const loginUser = async (email, password) => {
     return res.json()
 }
 
+const getTweetsSearch = async (userName, startDate, endDate) => {
+    var res = await fetch(`http://${config.server_host}:${config.server_port}/api/tweets?userName=${userName}&startDate=${startDate}&endDate=${endDate}`, {
+        method: 'GET',
+    })
+    return res.json()
+}
+
+const getUsersSearch = async (username) => {
+    var res = await fetch(`http://${config.server_host}:${config.server_port}/api/user?user=${username}`, {
+        method: 'GET',
+    })
+    return res.json()
+}
+
 
 
 
@@ -45,4 +59,6 @@ const loginUser = async (email, password) => {
 export {
     registerUser,
     loginUser,
+    getTweetsSearch,
+    getUsersSearch
 }
